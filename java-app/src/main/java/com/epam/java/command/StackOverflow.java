@@ -1,3 +1,4 @@
+
 package com.epam.java.command;
 
 public class StackOverflow implements Command {
@@ -13,6 +14,6 @@ public class StackOverflow implements Command {
     }
 
     private void recursiveCall() {
-        recursiveCall();
+        throw new UnsupportedOperationException("Method not implemented yet.");
     }
 }

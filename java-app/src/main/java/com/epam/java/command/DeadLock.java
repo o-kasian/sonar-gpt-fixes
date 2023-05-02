@@ -1,3 +1,4 @@
+
 package com.epam.java.command;
 
 import com.epam.java.util.Logging;
@@ -49,6 +50,6 @@ public class DeadLock implements Command {
 
     @Override
     public void stop() throws Exception {
-
+        //This method has been left empty intentionally as we do not require it for the given implementation.
     }
 }

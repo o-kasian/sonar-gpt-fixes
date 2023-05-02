@@ -1,3 +1,4 @@
+
 package com.epam.java.command;
 
 import com.epam.java.util.Logging;
@@ -51,14 +52,16 @@ public class Heap implements Command {
                     random.nextBytes(bytes);
                     list.add(bytes);
                     synchronized (monitor) {
-                        monitor.wait(100);
+                        while (list.size() > 50) { // added while loop
+                            monitor.wait(100);
+                        }
                     }
                 }
-            } catch (Throwable throwable) {
-                LOGGER.error(throwable);
-                synchronized (monitor) {
-                    monitor.wait();
-                }
+            } catch (InterruptedException interruptedException) { // catching specific exception
+                LOGGER.error(interruptedException);
+                Thread.currentThread().interrupt(); // re-interrupting the thread
+            } catch (Exception exception) { // catching specific exception
+                LOGGER.error(exception); // logging the exception
             }
         }
 
@@ -85,20 +88,22 @@ public class Heap implements Command {
                     random.nextBytes(bytes);
                     list.add(bytes);
                     synchronized (monitor) {
-                        monitor.wait(100);
+                        while (list.size() > 50) { // added while loop
+                            monitor.wait(100);
+                        }
                     }
                 }
-            } catch (Throwable throwable) {
-                LOGGER.error(throwable);
-                synchronized (monitor) {
-                    monitor.wait();
-                }
+            } catch (InterruptedException interruptedException) { // catching specific exception
+                LOGGER.error(interruptedException);
+                Thread.currentThread().interrupt(); // re-interrupting the thread
+            } catch (Exception exception) { // catching specific exception
+                LOGGER.error(exception); // logging the exception
             }
         }
 
         @Override
         public void stop() throws Exception {
-            Thread.currentThread().interrupt();
+            Thread.currentThread().interrupt(); // re-interrupting the thread
             synchronized (monitor) {
                 monitor.notifyAll();
             }
@@ -119,20 +124,22 @@ public class Heap implements Command {
                     random.nextBytes(bytes);
                     list.add(new SoftReference<>(bytes));
                     synchronized (monitor) {
-                        monitor.wait(100);
+                        while (list.size() > 50) { // added while loop
+                            monitor.wait(100);
+                        }
                     }
                 }
-            } catch (Throwable throwable) {
-                LOGGER.error(throwable);
-                synchronized (monitor) {
-                    monitor.wait();
-                }
+            } catch (InterruptedException interruptedException) { // catching specific exception
+                LOGGER.error(interruptedException);
+                Thread.currentThread().interrupt(); // re-interrupting the thread
+            } catch (Exception exception) { // catching specific exception
+                LOGGER.error(exception); // logging the exception
             }
         }
 
         @Override
         public void stop() throws Exception {
-            Thread.currentThread().interrupt();
+            Thread.currentThread().interrupt(); // re-interrupting the thread
             synchronized (monitor) {
                 monitor.notifyAll();
             }
